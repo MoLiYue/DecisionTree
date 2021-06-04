@@ -13,8 +13,8 @@ ID3实现
 信息增益（H） = 信息熵（总） - 信息熵（某个属性）
 
 信息熵（总） = -所有（分类的概率\*log2（分类的概率））之和
-
-```python 3
+实现：
+```python
 def calcTotolEnt(dataSet):
     totolNum = len(dataSet)
     labelCounts = {}
@@ -31,4 +31,16 @@ def calcTotolEnt(dataSet):
 ```
 
 信息熵（某个属性） = -所有（根据该属性分类的概率\*log2（根据该属性分类的概率））之和
+
+在完成选出最优`属性`之前需要为后续将数据集分开做一个准备：
+```python
+def splitDataSet(dataSet,axis,value):
+    retDataSet = []
+    for line in dataSet:
+        if line[axis] == value:
+            reducedLine = line[:axis]
+            reducedLine.extend(line[axis+1:])
+            retDataSet.append(reducedLine)
+    return retDataSet
+```
 
