@@ -14,7 +14,7 @@ ID3实现
 
 信息熵（总） = -所有（分类的概率\*log2（分类的概率））之和
 
-    '''python
+    ```python
     def calcTotolEnt(dataSet):
         totolNum = len(dataSet)
         labelCounts = {}
@@ -28,7 +28,7 @@ ID3实现
             probability = float(labelCounts[key])/totolNum
             totolEnt -= probability*log(probability,2)
         return totolEnt
-    '''
+    ```
 
 信息熵（某个属性） = -所有（根据该属性分类的概率\*log2（根据该属性分类的概率））之和
 
