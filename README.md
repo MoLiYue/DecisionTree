@@ -45,7 +45,7 @@ def splitDataSet(dataSet,axis,value):
 ```
 获得子集时去掉了已经分过类的属性。
 
-选择最好的属性去分类：
+选择出最好的属性并依据该属性进行分组：
 ```python
 def chooseBestFeatureToSplit(dataSet):
     featureNumbers = len(dataSet[0])-1
@@ -66,3 +66,44 @@ def chooseBestFeatureToSplit(dataSet):
             bestFeature = featureNO
     return bestFeature
 ```
+
+考虑依照大多数原则，我们需要确定每种分类下的最终属性
+每种分类下数量最多的属性被认为是该分类下的最终属性
+```python
+def majorityCnt(classList):
+    classCount = {}
+    for vote in classList:
+        if vote not in classCount.keys():
+            classCount[vote] = -0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.items(),key = operator.itemgetter(1),reverse = True)
+    return sortedClassCount[0][0]
+```
+
+做好准备后可以开始创建树：
+创建树使用递归创建
+结束条件为：
+1.在某一属性的分类下，所有的结论都相同
+2.只剩最后一列属性
+
+创建树，使用递归
+```python
+def createTree(dataSet,labels):
+    classList = [line[-1] for line in dataSet]
+    if classList.count (classList[0]) == len(classList):
+        return classList[0]
+    if len(dataSet[0]) == 1:
+        return majorityCnt(classList)
+    bestFeatureColumNum = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = labels[bestFeatureColumNum]
+    myTree = {bestFeatLabel:{}}
+    del(labels[bestFeatureColumNum])
+    featValus = [line[bestFeatureColumNum] for line in dataSet]
+    uniqueValus = set(featValus)
+    for value in uniqueValus:
+        subLabels = labels[:]
+        myTree[bestFeatLabel][value] = createTree(splitDataSet\
+                            (dataSet,bestFeatureColumNum,value),subLabels)
+    return myTree
+```
+运行程序
