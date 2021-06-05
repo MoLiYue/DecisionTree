@@ -44,3 +44,25 @@ def splitDataSet(dataSet,axis,value):
     return retDataSet
 ```
 获得子集时去掉了已经分过类的属性。
+
+选择最好的属性去分类：
+```python
+def chooseBestFeatureToSplit(dataSet):
+    featureNumbers = len(dataSet[0])-1
+    baseEntropy = calcTotolEnt(dataSet)
+    bestInfoGain = 0
+    bestFeature = -1
+    for featureNO in range(featureNumbers):
+        featureList = [line[i] for line in dataSet]
+        uniqueVals = set(featureList)
+        newEntropy = 0
+        for value in uniqueVals:
+            subDataSet = splitDataSet(data,featureNO,value)
+            probability = len(subDataSet)/float(len(dataSet))
+            newEntropy += probability*calcTotolEnt(subDataSet)
+        infoGain = baseEntropy - newEntropy
+        if(infoGain > bestInfoGain):
+            bestInfoGain = infoGain
+            bestFeature = featureNO
+    return bestFeature
+```
