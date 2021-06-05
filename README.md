@@ -68,6 +68,7 @@ def chooseBestFeatureToSplit(dataSet):
 ```
 
 考虑依照大多数原则，我们需要确定每种分类下的最终属性
+
 每种分类下数量最多的属性被认为是该分类下的最终属性
 ```python
 def majorityCnt(classList):
@@ -81,9 +82,13 @@ def majorityCnt(classList):
 ```
 
 做好准备后可以开始创建树：
+
 创建树使用递归创建
+
 结束条件为：
+
 1.在某一属性的分类下，所有的结论都相同
+
 2.只剩最后一列属性
 
 创建树，使用递归
