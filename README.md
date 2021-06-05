@@ -92,6 +92,7 @@ def majorityCnt(classList):
 2.只剩最后一列属性
 
 创建树，使用递归
+
 ```python
 def createTree(dataSet,labels):
     classList = [line[-1] for line in dataSet]
