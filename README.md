@@ -32,7 +32,7 @@ def calcTotolEnt(dataSet):
 
 信息熵（某个属性） = -所有（*根据该属性分类后***不同结论**的概率\*log2（*根据该属性分类后***不同结论**的概率））之和
 
-在完成选出最优`属性`之前需要为后续将数据集分开做一个准备：
+由于需要计算`根据该属性分类后`的不同结论的概率，我们需要获得`根据该属性分类`的子集：
 ```python
 def splitDataSet(dataSet,axis,value):
     retDataSet = []
@@ -43,4 +43,4 @@ def splitDataSet(dataSet,axis,value):
             retDataSet.append(reducedLine)
     return retDataSet
 ```
-
+获得子集时去掉了已经分过类的属性。
