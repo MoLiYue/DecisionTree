@@ -81,6 +81,10 @@ def majorityCnt(classList):
     return sortedClassCount[0][0]
 ```
 
+`dict.items()`是将字典以元组的形式展现出来
+
+`operator.itemgetter(1)`: After `f = itemgetter(2)`, the call `f(r)` returns `r[2]`.
+
 做好准备后可以开始创建树：
 
 创建树使用递归创建
